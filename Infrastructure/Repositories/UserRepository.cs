@@ -1,7 +1,7 @@
-﻿using Core.DTOs;
-using Core.Entities;
+﻿using Core.Entities;
 using Core.Interfaces;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
@@ -36,14 +36,15 @@ namespace Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<UserDTO?> GetUserAsyc(Guid userId)
+        public Task<User?> GetUserAsyc(Guid userId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<UserDTO?> GetUserByUsername(string username)
+        public async Task<User?> GetUserByUsername(string username)
         {
-            throw new NotImplementedException();
+            User user = await base._dbSet.FirstOrDefaultAsync(u => u.Username == username);
+            return user;
         }
 
         public Task<Guid> RegisterUserAsync(string username, string password, string timeZone)

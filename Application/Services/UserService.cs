@@ -17,6 +17,12 @@ namespace Application.Services
 
         public async Task<Guid> RegisterUserAsync(string username, string password, string timeZone)
         {
+            var existingUser = await _userRepository.GetUserByUsername(username);
+            if (existingUser != null)
+            {
+                throw new InvalidOperationException("Username is already taken.");
+            }
+
             var user = new User
             {
                 Id = Guid.NewGuid(),

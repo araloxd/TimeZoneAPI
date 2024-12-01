@@ -15,15 +15,21 @@ namespace API.Controllers
             _userService = userService;
         }
 
-
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] CreateUserDTO userDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var userId = await _userService.RegisterUserAsync(userDto.Username, userDto.Password, userDto.TimeZone);
-            return CreatedAtAction(nameof(UserDTO), new { Username = userId });
+            try
+            {
+                var userId = await _userService.RegisterUserAsync(userDto.Username, userDto.Password, userDto.TimeZone);
+                return CreatedAtAction(nameof(UserDTO), new { Username = userId });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(new { Message = ex.Message });
+            }
         }
     }
 }

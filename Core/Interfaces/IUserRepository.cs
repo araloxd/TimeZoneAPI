@@ -8,7 +8,7 @@ namespace Core.Interfaces
         Task<Guid> RegisterUserAsync(string username, string password, string timeZone);
         Task<string?> AuthenticateUserAsync(string username, string password);
         Task UpdateTimeZoneAsync(Guid userId, string timeZone);
-        Task<UserDTO?> GetUserAsyc(Guid userId);
-        Task<UserDTO?> GetUserByUsername(string username);
+        Task<User?> GetUserAsyc(Guid userId);
+        Task<User?> GetUserByUsername(string username);
     }
 }
