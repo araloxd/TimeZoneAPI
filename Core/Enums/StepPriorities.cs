@@ -1,6 +1,6 @@
 ﻿namespace Core.Enums
 {
-    public enum Priorities
+    public enum StepPriorities
     {
         Low,
         Medium,
