@@ -31,9 +31,9 @@ namespace Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<User?> GetByIdAsync(Guid id)
+        public async Task<User?> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _dbSet.FirstOrDefaultAsync(user => user.Id == id);
         }
 
         public Task<User?> GetUserAsyc(Guid userId)

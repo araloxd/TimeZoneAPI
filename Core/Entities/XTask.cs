@@ -2,7 +2,7 @@
 
 namespace Core.Entities
 {
-    public class Step
+    public class XTask
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }

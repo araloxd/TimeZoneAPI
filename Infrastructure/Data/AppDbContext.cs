@@ -5,7 +5,7 @@ namespace Infrastructure.Data
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Step> Steps { get; set; }
+        public DbSet<XTask> Tasks { get; set; }
         public DbSet<User> Users { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
@@ -13,7 +13,7 @@ namespace Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Step>(entity =>
+            modelBuilder.Entity<XTask>(entity =>
             {
                 entity.HasKey(s => s.Id);
                 entity.Property(s => s.Title)

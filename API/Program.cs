@@ -15,11 +15,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCustomSwagger();
+builder.Services.AddSwaggerWithJwtAuthentication();
 builder.Services.AddJwtAuthentication(builder.Configuration);
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(BaseRepository<>));
-builder.Services.AddScoped<IStepRepository, StepRepository>();
+builder.Services.AddScoped<IXTaskRepository, XTaskRepository>();
+builder.Services.AddScoped<IXTaskService, XTaskService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
@@ -36,7 +38,7 @@ app.UseAuthorization();
 app.UseHttpsRedirection();
 app.MapControllers();
 
-app.Run(); builder.Services.AddScoped<IStepRepository, StepRepository>();
+app.Run(); builder.Services.AddScoped<IXTaskRepository, XTaskRepository>();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {

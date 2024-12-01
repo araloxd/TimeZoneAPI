@@ -99,9 +99,6 @@ namespace Application.Services
             var claims = new[] { new Claim(JwtRegisteredClaimNames.Sub, user.Username), new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()) };
 
             var token = new JwtSecurityToken(
-                issuer: audience,
-                audience: audience,
-                claims: claims,
                 expires: DateTime.UtcNow.AddHours(1),
                 signingCredentials: signingCredentials
             );
