@@ -1,37 +1,93 @@
+# Time-Zone Aware To-Do List Application
 
-Build a Time-Zone Aware To-Do List Application
-Requirements:
-Core Functionality:
+This application is a robust and scalable to-do list system with time-zone awareness. It allows users to manage their tasks efficiently while accounting for their local time zones.
 
+## Features
 
-User Authentication: Implement a secure user authentication system with login and password protection.
-Task Creation and Editing: Allow users to create, edit, and delete tasks.
-Task Prioritization: Implement a system to prioritize tasks (e.g., high, medium, low).
-Task Due Dates: Users should be able to set due dates for tasks.
-Task Completion: Allow users to mark tasks as completed.
-Task Search: Implement a search functionality to filter tasks based on keywords.
-Time Zone Handling:
+### Core Functionality
+- **User Authentication**: Secure login and password protection.
+- **Task Management**:
+  - Create, edit, and delete tasks.
+  - Prioritize tasks (High, Medium, Low).
+  - Set due dates for tasks.
+  - Mark tasks as completed.
+  - Search tasks using keywords.
 
+### Time Zone Handling
+- **User-Specific Time Zones**: Allow users to set their preferred time zones.
+- **Time Zone-Aware Display**: Display tasks in the user’s local time zone.
+- **Server-Side Time Zone Conversion**: Ensure server-side operations consider user-specific time zones.
 
-User-Specific Time Zones: Allow users to set their preferred time zone in their account settings.
-Time Zone-Aware Display: Display task due dates and creation times in the user's local time zone.
-Time Zone Conversion for Server-Side Operations: Ensure that server-side operations (e.g., scheduling tasks) consider the user's time zone.
-Additional Features (Optional):
+### Additional Features (Optional)
+- **Task Recurrence**: Set recurring tasks (e.g., daily, weekly, monthly).
+- **Task Categories**: Categorize tasks for better organization (supports tags).
+- **User Profiles**: View task history and account settings in a user profile.
 
+## Installation
 
-Task Recurrence: Allow users to set recurring tasks (e.g., daily, weekly, monthly).
-Task Categories: Allow users to categorize tasks for better organization. (tags would also be accepted)
-User Profiles: Provide a user profile page where users can view their task history and settings.
-Submission Guidelines:
-Code Repository: Submit your code to a public repository (e.g., GitHub, GitLab) and provide a link to the repository.
-Deployment: If possible, deploy the application to a publicly accessible URL.
-Documentation: Provide clear documentation on how to set up and run the application.
-Testing: Include unit tests and integration tests to demonstrate code quality.
-Evaluation Criteria:
-Code Quality: Code readability, maintainability, and adherence to best practices.
-Functionality: Implementation of all required features and additional features.
-Security: Security best practices, including input validation, output encoding, and secure authentication.
-Testing: Thorough testing coverage to ensure code quality and reliability. (We don’t need to see full coverage but some example of tests please)
-Documentation: Clear and concise documentation to aid understanding and maintenance.
-By completing this task, you will demonstrate your ability to design, develop, and deploy a robust and scalable web application using C# and .NET.
+### Prerequisites
+- **.NET 8.0**
+- **SQL Server** or **SQLite** for database.
+- **Entity Framework Core** for ORM.
+- **Swagger** for API documentation.
 
+### Setup Instructions
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/your-repository](https://github.com/araloxd/TimeZoneAPI.git
+    cd TimeZoneAPI
+    ```
+
+2. Configure the connection strings in `appsettings.json`:
+    ```json
+    {
+        "ConnectionStrings": {
+            "SQL": "Your SQL Server connection string",
+            "LOCAL": "Your SQLite connection string"
+        }
+    }
+    ```
+
+3. Run database migrations:
+    ```bash
+    dotnet ef migrations add InitialCreate --project Infrastructure --startup-project API
+    dotnet ef database update --project Infrastructure --startup-project API
+    ```
+
+4. Start the application:
+    ```bash
+    dotnet run --project API
+    ```
+
+5. Open Swagger for API testing:
+    - URL: `https://localhost:<port>/swagger`
+
+## API Documentation
+
+### Endpoints
+
+#### User Authentication
+- `POST /api/Users/register` - Register a new user.
+- `POST /api/Users/login` - Login and receive a JWT token.
+
+#### Task Management
+- `GET /api/Tasks/user/{userId}` - Get all tasks for a user.
+- `POST /api/Tasks` - Create a new task.
+- `PUT /api/Tasks/{taskId}` - Update an existing task.
+- `DELETE /api/Tasks/{taskId}` - Delete a task.
+
+### Time Zone Support
+- Tasks are displayed in the user’s local time zone.
+
+## Testing
+
+### Unit Tests
+- Use `xUnit` for unit testing.
+- Include tests for services and repositories.
+
+### Integration Tests
+- Test authentication flows and task management endpoints.
+
+### Run Tests
+```bash
+dotnet test
